@@ -1,0 +1,27 @@
+module.exports = {
+  env: {
+    es6: true,
+    node: true,
+  },
+  extends: [
+    'airbnb-base',
+  ],
+  plugins: ['prettier'],
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+  },
+  parserOptions: {
+    ecmaVersion: 2018,
+    sourceType: 'module',
+  },
+  rules: {
+    "prettier/prettier": "error",
+    "class-methods-use-this": "off",
+    "no-param-reassign": "off",
+    "linebreak-style": ["error", "windows"],
+    "camelcase": "off",
+    "no-unused-vars": ["error", {"argsIgnorePattern": "next"}],
+
+  },
+};
