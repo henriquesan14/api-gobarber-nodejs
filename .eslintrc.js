@@ -22,6 +22,6 @@ module.exports = {
     "linebreak-style": ["error", "windows"],
     "camelcase": "off",
     "no-unused-vars": ["error", {"argsIgnorePattern": "next"}],
-
+    "indent": 8
   },
 };
