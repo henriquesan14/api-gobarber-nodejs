@@ -1,6 +1,8 @@
 import Appointment from '../models/Appointment';
 import User from '../models/User';
 import * as Yup from 'yup';
+import { startOfHour, parseISO, isBefore } from 'date-fns';
+import { check } from 'prettier';
 
 class AppointmentController {
     async store(req, res){
@@ -19,12 +21,28 @@ class AppointmentController {
         if(!isProvider){
             return res.status(401).json({error: 'You can only create appointments providers'});
         }
+        const hourStart = startOfHour(parseISO(date));
+        if(isBefore(hourStart, new Date())){
+            return res.status(400).json({error: 'Past dates are not permitted'})
+        }
+        /** Check date availability */
+
+        const checkAvailability = await Appointment.findOne({
+            where: {
+                provider_id,
+                canceled_at: null,
+                date: hourStart
+            }
+        });
+        if(checkAvailability){
+            return res.status(400).json({ error: 'Appointment date is not available'});
+        }
         const appointment = await Appointment.create({
             user_id: req.userId,
             provider_id,
             date
         });
-        return res.json();
+        return res.json(appointment);
     }
 }
 
