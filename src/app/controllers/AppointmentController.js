@@ -2,7 +2,6 @@ import Appointment from '../models/Appointment';
 import User from '../models/User';
 import File from '../models/File';
 import Notification from '../schemas/Notification';
-import * as Yup from 'yup';
 import pt from 'date-fns/locale/pt'
 import { startOfHour, parseISO, isBefore, format, subHours } from 'date-fns';
 import Queue from '../../lib/Queue';
@@ -39,13 +38,6 @@ class AppointmentController {
     }
 
     async store(req, res){
-        const schema = Yup.object().shape({
-            provider_id: Yup.number().required(),
-            date: Yup.date().required()
-        });
-        if(!(await schema.isValid(req.body))){
-            return res.status(400).json({error: 'Validation fails'});
-        }
         const { provider_id, date } = req.body;
         /** Check if provider_id is a provider */
         const isProvider = await User.findOne({
