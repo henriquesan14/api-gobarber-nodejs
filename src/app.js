@@ -1,5 +1,9 @@
 import './bootstrap';
-
+import cors from 'cors';
+import helmet from 'helmet';
+import redis from 'redis';
+import RateLimit from 'express-rate-limit';
+import RateLimitRedis from 'rate-limit-redis';
 import express from 'express';
 import path from 'path';
 import Youch from 'youch';
@@ -22,8 +26,15 @@ class App {
 
   middlewares() {
     this.server.use(Sentry.Handlers.requestHandler());
+    this.server.use(helmet());
+    this.server.use(cors());
     this.server.use(express.json());
     this.server.use('/files', express.static(path.resolve(__dirname, "..", "tmp", "uploads")));
+
+    if(process.env.NODE_ENV !== 'development'){
+
+
+    }
   }
 
   routes() {
