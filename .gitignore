@@ -1,4 +1,5 @@
 node_modules
+dist
 Construir
 npm-debug.log
 .env

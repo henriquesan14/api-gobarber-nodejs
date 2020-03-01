@@ -4,8 +4,9 @@ import Redis from 'ioredis';
 class Cache {
     constructor(){
         this.redis = new Redis({
-            host: process.env.REDIS_HOST,
-            port: process.env.REDIS_PORT,
+            host: 'ec2-34-203-26-254.compute-1.amazonaws.com',
+            port: 8019,
+            password: 'p6b954d41803cc224607065da023563e2932e7dd7f384ae99148c56776d2b02f8',
             keyPrefix: 'cache:'
         });
     }

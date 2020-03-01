@@ -1,9 +1,6 @@
 import './bootstrap';
 import cors from 'cors';
 import helmet from 'helmet';
-import redis from 'redis';
-import RateLimit from 'express-rate-limit';
-import RateLimitRedis from 'rate-limit-redis';
 import express from 'express';
 import path from 'path';
 import Youch from 'youch';
