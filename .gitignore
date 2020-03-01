@@ -1,6 +1,5 @@
 node_modules
 dist
-DS_Store
 Construir
 npm-debug.log
 .env
