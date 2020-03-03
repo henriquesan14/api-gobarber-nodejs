@@ -48,6 +48,9 @@ class UserController {
                 }
             ]
         });
+        if(provider){
+            await Cache.invalidate('providers');
+        }
         return res.json({
             id,
             name,
