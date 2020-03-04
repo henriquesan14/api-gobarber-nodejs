@@ -3,12 +3,12 @@ import File from '../models/File';
 class FileController {
     async store(req, res){
         const { originalname: name, filename: path } = req.file;
-
+        console.log('BORAAAAA');
         const file = await File.create({
             name,
             path
         });
-
+        console.log(file);
         return res.json(file);
     }
 }
