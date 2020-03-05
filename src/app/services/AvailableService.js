@@ -1,6 +1,7 @@
 import Appointment from '../models/Appointment';
 import { startOfDay, endOfDay, setSeconds, setMinutes, setHours, format, isAfter } from 'date-fns';
 import { Op } from 'sequelize';
+import moment from 'moment';
 
 class AvailableService {
     async run ({ provider_id, date  }){
@@ -31,13 +32,16 @@ class AvailableService {
         const available = schedule.map(time => {
             const [hour, minute] = time.split(':');
             const value = setSeconds(setMinutes(setHours(date, hour), minute),0);
-            console.log(new Date());
-            console.log(value);
+            
+            const dataAtual = new Date();
+            const dataMoment = moment(dataAtual);
+            console.log(dataMoment);
+            console.log(dataAtual);
             return {
                 time,
                 value: format(value, "yyyy-MM-dd'T'HH:mm:ssxxx"),
                 available:
-                    isAfter(value, new Date()) &&
+                    isAfter(value, dataMoment) &&
                     !appointments.find(a =>
                         format(a.date, 'HH:mm') == time
                     )
