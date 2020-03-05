@@ -31,6 +31,8 @@ class AvailableService {
         const available = schedule.map(time => {
             const [hour, minute] = time.split(':');
             const value = setSeconds(setMinutes(setHours(date, hour), minute),0);
+            console.log(new Date());
+            console.log(value);
             return {
                 time,
                 value: format(value, "yyyy-MM-dd'T'HH:mm:ssxxx"),
