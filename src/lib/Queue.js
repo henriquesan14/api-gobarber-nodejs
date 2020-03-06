@@ -1,6 +1,5 @@
 import Bee from 'bee-queue';
 import CancellationMail from '../app/jobs/CancellationMail';
-import redisConfig from '../config/redis'
 
 const jobs = [CancellationMail];
 
@@ -14,7 +13,10 @@ class Queue {
         jobs.forEach(({ key, handle }) => {
             this.queues[key] = {
                 bee: new Bee(key, {
-                    redis: redisConfig,
+                    redis: {
+                        no_ready_check: true,
+                        url: process.env.REDIS_URL
+                    },
                 }),
                 handle,
             }

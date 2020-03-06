@@ -14,14 +14,15 @@ class Database {
     }
 
     init(){
-        this.connetion = new Sequelize(databaseConfig);
+        this.connetion = new Sequelize(process.env.DB_URL,
+         databaseConfig);
         models
         .map(model => model.init(this.connetion))
         .map(model => model.associate && model.associate(this.connetion.models));
     }
 
     mongo(){
-        this.mongoConnetion = mongoose.connect(process.env.MONGO_URL, {
+        this.mongoConnetion = mongoose.connect(process.env.MONGODB_URI, {
             useNewUrlParser: true,
             useFindAndModify: true,
             useUnifiedTopology: true

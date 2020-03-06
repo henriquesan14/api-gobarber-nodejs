@@ -1,6 +1,4 @@
 import { Router } from 'express';
-import Brute from 'express-brute';
-import BruteRedis from 'express-brute-redis';
 import multer from 'multer';
 import multerConfig from './config/multer';
 import UserController from './app/controllers/UserController';
@@ -18,7 +16,6 @@ import validateUserUpdate from  './app/validators/UserUpdate';
 import validateSessionStore from './app/validators/SessionStore';
 import validateAppointmentStore from './app/validators/AppointmentStore';
 
-import redisConfig from './config/redis';
 
 const routes = new Router();
 const upload = multer(multerConfig);
