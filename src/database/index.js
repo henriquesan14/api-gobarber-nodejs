@@ -14,7 +14,7 @@ class Database {
     }
 
     init(){
-        this.connetion = new Sequelize(process.env.DB_URL,
+        this.connetion = new Sequelize(process.env.DATABASE_URL,
          databaseConfig);
         models
         .map(model => model.init(this.connetion))
